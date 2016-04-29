@@ -8,20 +8,17 @@ public class RefDataTest {
     private static final Logger LOG = LoggerFactory.getLogger(RefDataTest.class);
     
     public static void main(String[] args) throws InterruptedException {
-        Country country1 = Country.AUS;
-        country1.getDescription();
+        Country aus = Country.AUS;
+        aus.getDescription();
+        aus.getStates();
+        
+        LOG.debug("--------- Active -------------------");
         for (Country country : Country.effectiveValues()) {
-            LOG.debug(country.toString() + " : " + country.getStates());
+            LOG.debug(country.toString() + " : " + country.getDialingCode() + " : " + country.getStates());
         }
-        LOG.debug("----------------------------");
+        LOG.debug("---------- All ------------------");
         for (Country country : Country.sortedByName()) {
-            LOG.debug(country.toString() + " : " + country.getEffectiveTo());
+            LOG.debug(country.toString() + " : " + country.getEffectiveFrom() + " : " + country.getEffectiveTo());
         }
-//        LOG.debug("" + Country.AUS.getStates());
-//        for (int i = 0; i < 100; i++) {
-//            LOG.debug(Country.NZ + ":" + Country.NZ.getStates());
-//            Thread.sleep(10 * 1000);
-//        }
     }
-
 }
