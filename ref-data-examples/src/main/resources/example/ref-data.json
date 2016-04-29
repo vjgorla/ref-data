@@ -1,0 +1,11 @@
+{
+    "COUNTRY": [
+        { "code":"AUS", "description":"Australia", "attributes":"states=ACT,NSW" }, 
+        { "code":"NZ", "description":"New Zealand", "attributes":"states=TST" }
+    ],
+    "STATE": [
+        { "code":"ACT", "description":"Australian Capital Territory"}, 
+        { "code":"NSW", "description":"New South Wales"}, 
+        { "code":"TST", "description":"Test"}
+    ]
+}
