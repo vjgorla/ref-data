@@ -95,3 +95,36 @@ Country.AUS.getStates();
 Country.decode('NZ').getStates();
 customer.getCountry().getStates();
 ```
+
+## Binding types to your domain entities using JPA
+Define binding
+```java
+@Entity
+@Table(name = "CUSTOMER")
+public class Customer {
+        
+    @Id
+    @Column(name = "ID", nullable = false)
+    private long id;
+        
+    @Column(name = "NAME", nullable = false)
+    private String name;
+    
+    ....
+    
+    @Column(name = "COUNTRY") 
+    @Type(type=RefDataValueJpaBinder.BINDER)
+    private Country country;
+        
+}    
+```
+Using jpa bindings
+```java
+...
+customer.setCountry(Country.AUS);
+entityManager.persist(customer);
+...
+Country custCountry = customer.getCountry();
+if (custCountry.equals(Country.AUS)) {
+...
+```
