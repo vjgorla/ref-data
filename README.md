@@ -13,7 +13,9 @@ public class Country extends AbstractRefDataValue {
     
     private static final RefDataType<Country> TYPE = new RefDataType<Country>(Country.class);
     
-    public static final Country AUS = decode("AUS");
+    // A subset of the list can be exposed as static references (only required if 
+    // writing branching logic, see examples below)
+    public static final Country AUS = decode("AUS"); // Optional
 
     private Country(String code) {
         super(TYPE, code);
