@@ -1,7 +1,7 @@
 # ref-data
 Framework to simplify reference data loading for java applications
 
-Basic usage
+## Basic usage
 
 1 Create a concreate type
 ```java
@@ -56,4 +56,42 @@ Country nz = Country.decode('NZ');
 List<Country> countries = Country.values();
 // Write branching logic
 if (customer.getCountry().equals(Country.AUS)) {
+```
+
+## Type attributes
+Defining type attributes
+```java
+public class Country extends AbstractRefDataValue {
+...
+    public String getDialingCode() {
+        return getAttribute("dialingCode");
+    }
+...    
+```
+Using type attributes
+```java
+Country.AUS.getDialingCode();
+Country.decode('NZ').getDialingCode();
+customer.getCountry().getDialingCode();
+```
+
+## Relationships between types
+Defining relationship
+```java
+public class Country extends AbstractRefDataValue {
+...
+    public List<State> getStates() {
+        List<State> states = new ArrayList<>();
+        for (String stateCode : getAttributeAsList("states")) {
+            states.add(State.decode(stateCode.trim()));
+        }
+        return states;
+    }
+...    
+```
+Using relationships
+```java
+Country.AUS.getStates();
+Country.decode('NZ').getStates();
+customer.getCountry().getStates();
 ```
