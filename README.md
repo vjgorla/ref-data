@@ -30,6 +30,7 @@ public class Country extends AbstractRefDataValue {
 ```
 2 Specify where data is loaded from in ref-data-config.properties file, and place it on classpath.
 ```properties
+ref-data.cache.implementation.class                   = com.github.vjgorla.refdata.cache.impl.SimpleRefDataCache
 ###### JPA ######
 ref-data.loader.implementation.class                  = com.github.vjgorla.refdata.loader.impl.JpaRefDataLoader
 ref-data.loader.jpa.javax.persistence.provider        = org.hibernate.ejb.HibernatePersistence
@@ -42,8 +43,8 @@ ref-data.loader.jpa.hibernate.default_schema          = PUBLIC
 ref-data.loader.jpa.hibernate.dialect                 = org.hibernate.dialect.HSQLDialect
 ref-data.loader.jpa.hibernate.hbm2ddl.auto            = none
 ###### or JSON ######
-#ref-data.loader.implementation.class=com.github.vjgorla.refdata.loader.impl.JsonRefDataLoader
-#ref-data.loader.json.data.file=/ref-data.json
+#ref-data.loader.implementation.class                 = com.github.vjgorla.refdata.loader.impl.JsonRefDataLoader
+#ref-data.loader.json.data.file                       = /ref-data.json
 ```
 3 If using JPA persistence, create database schema (This only needs to be done once regardless of the number of types)
 ```sql
