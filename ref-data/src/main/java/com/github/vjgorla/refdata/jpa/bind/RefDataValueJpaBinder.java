@@ -23,7 +23,10 @@ import com.github.vjgorla.refdata.util.ReflectionUtils;
  */
 public class RefDataValueJpaBinder<V extends AbstractRefDataValue> implements UserType, DynamicParameterizedType {
     
+    /** Binder class name, which is this class. 
+     *  To use in annotations, it has to be a literal value, can't use RefDataValueJpaBinder.class.getName() */
     public static final String BINDER = "com.github.vjgorla.refdata.jpa.bind.RefDataValueJpaBinder";
+    
     private static final int[] SQL_TYPES = new int[] { Types.VARCHAR };
     
     private RefDataType<V> type;

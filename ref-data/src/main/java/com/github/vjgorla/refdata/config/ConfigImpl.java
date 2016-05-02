@@ -29,6 +29,11 @@ public class ConfigImpl extends Config {
     }
 
     @Override
+    public String getCacheImplClass() {
+        return getString("ref-data.cache.implementation.class");
+    }
+    
+    @Override
     public String getJsonDataFile() {
         return getString("ref-data.loader.json.data.file");
     }

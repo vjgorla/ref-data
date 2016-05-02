@@ -5,26 +5,24 @@ import java.util.Date;
 import java.util.Set;
 import java.util.TreeMap;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.github.vjgorla.refdata.RefDataType;
+import com.github.vjgorla.refdata.config.Config;
 import com.github.vjgorla.refdata.entity.RefDataValueEntity;
-import com.github.vjgorla.refdata.loader.RefDataLoader;
-import com.github.vjgorla.refdata.util.DateUtils;
-import com.google.common.cache.CacheBuilder;
-import com.google.common.cache.LoadingCache;
+import com.github.vjgorla.refdata.util.ReflectionUtils;
 
 /**
  * 
  * @author Vijaya Gorla
  */
-public class RefDataCache {
+public abstract class RefDataCache {
 
-    private static LoadingCache<RefDataType<?>, RefDataValueMap> CACHE  
-        = CacheBuilder.newBuilder().build(RefDataLoader.getLoaderImpl());
-
-    private RefDataCache() {
-    }
+    private static final Logger LOG = LoggerFactory.getLogger(RefDataCache.class);
+    private static RefDataCache CACHE_IMPL;
     
-    public static RefDataValueEntity get(RefDataType<?> type, String code) {
+    public RefDataValueEntity get(RefDataType<?> type, String code) {
         RefDataValueMap refDataValueMap = getNotExpired(type);
         RefDataValueEntity entity = refDataValueMap.get(code);
         if (entity == null) {
@@ -33,18 +31,20 @@ public class RefDataCache {
         return entity;
     }
 
-    public static Set<String> getCodes(RefDataType<?> type) {
+    public Set<String> getCodes(RefDataType<?> type) {
         RefDataValueMap refDataValueMap = getNotExpired(type);
         return Collections.unmodifiableSet(refDataValueMap.keySet());
     }
     
-    private static RefDataValueMap getNotExpired(RefDataType<?> type) {
-        RefDataValueMap refDataValueMap = CACHE.getUnchecked(type);
-        if (refDataValueMap.isExpired()) {
-            CACHE.invalidate(type);
-            refDataValueMap = CACHE.getUnchecked(type);
+    protected abstract RefDataValueMap getNotExpired(RefDataType<?> type);
+    
+    public static RefDataCache getCacheImpl() {
+        if (RefDataCache.CACHE_IMPL == null) {
+            String implClassName = Config.getInstance().getCacheImplClass();
+            LOG.debug("Cache implementation [{}]", implClassName);
+            RefDataCache.CACHE_IMPL = ReflectionUtils.newInstance(implClassName);
         }
-        return refDataValueMap;
+        return RefDataCache.CACHE_IMPL;
     }
     
     @SuppressWarnings("serial")
@@ -56,9 +56,8 @@ public class RefDataCache {
             this.loadedTs = loadedTs;
         }
 
-        public boolean isExpired() {
-            Date now = new Date();
-            return DateUtils.isAfterIgnoreTime(now, loadedTs);
+        public Date getLoadedTs() {
+            return this.loadedTs;
         }
     }
 }

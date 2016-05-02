@@ -3,7 +3,7 @@ package com.github.vjgorla.refdata.util;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
-import com.github.vjgorla.refdata.cache.RefDataCache;
+import com.github.vjgorla.refdata.cache.impl.SimpleRefDataCache;
 import com.github.vjgorla.refdata.config.Config;
 import com.github.vjgorla.refdata.loader.RefDataLoader;
 import com.google.common.cache.CacheBuilder;
@@ -19,7 +19,7 @@ public class TestUtils {
     }
     
     public static void resetRefDataCache() {
-        reflectionSet(RefDataCache.class, "CACHE", CacheBuilder.newBuilder().build(RefDataLoader.getLoaderImpl()));
+        reflectionSet(SimpleRefDataCache.class, "CACHE", CacheBuilder.newBuilder().build(RefDataLoader.getLoaderImpl()));
     }
     
     private static void reflectionSet(Class<?> clazz, String fieldName, Object value) {

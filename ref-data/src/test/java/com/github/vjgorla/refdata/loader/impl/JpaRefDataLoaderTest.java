@@ -15,6 +15,7 @@ import org.junit.Test;
 
 import com.github.vjgorla.refdata.AbstractRefDataValue;
 import com.github.vjgorla.refdata.RefDataType;
+import com.github.vjgorla.refdata.cache.impl.SimpleRefDataCache;
 import com.github.vjgorla.refdata.entity.RefDataTypeEntity;
 import com.github.vjgorla.refdata.entity.RefDataValueEntity;
 import com.github.vjgorla.refdata.loader.impl.JpaRefDataLoader;
@@ -33,6 +34,10 @@ public class JpaRefDataLoaderTest {
             @Override
             public String getLoaderImplClass() {
                 return MockJpaRefDataLoader.class.getName();
+            }
+            @Override
+            public String getCacheImplClass() {
+                return SimpleRefDataCache.class.getName();
             }
             @Override
             public Properties getJpaProperties() {

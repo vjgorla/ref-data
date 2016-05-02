@@ -44,23 +44,23 @@ public class RefDataType<V extends AbstractRefDataValue> implements Serializable
     }
     
     void ensureExists(String code) {
-        RefDataCache.get(this, code);
+        RefDataCache.getCacheImpl().get(this, code);
     }
     
     String getDescription(String code) {
-        return RefDataCache.get(this, code).getDescription();
+        return RefDataCache.getCacheImpl().get(this, code).getDescription();
     }
     
     Date getEffectiveFrom(String code) {
-        return RefDataCache.get(this, code).getEffectiveFrom();
+        return RefDataCache.getCacheImpl().get(this, code).getEffectiveFrom();
     }
 
     Date getEffectiveTo(String code) {
-        return RefDataCache.get(this, code).getEffectiveTo();
+        return RefDataCache.getCacheImpl().get(this, code).getEffectiveTo();
     }
 
     String getAttribute(String code, String key) {
-        return RefDataCache.get(this, code).getAttribute(key);
+        return RefDataCache.getCacheImpl().get(this, code).getAttribute(key);
     }
     
     public V decode(String code) {
@@ -69,7 +69,7 @@ public class RefDataType<V extends AbstractRefDataValue> implements Serializable
     
     public List<V> values(boolean effectiveOnly) {
         List<V> values = new ArrayList<>();
-        for (String code : RefDataCache.getCodes(this)) {
+        for (String code : RefDataCache.getCacheImpl().getCodes(this)) {
             V value = decode(code);
             if (!effectiveOnly || value.isEffective()) {
                 values.add(value);

@@ -24,4 +24,9 @@ public class EmptyConfig extends Config {
     public Properties getJpaProperties() {
         throw new UnsupportedOperationException();
     }
+
+    @Override
+    public String getCacheImplClass() {
+        throw new UnsupportedOperationException();
+    }
 }

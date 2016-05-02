@@ -12,6 +12,8 @@ public abstract class Config {
 
     public abstract String getLoaderImplClass();
     
+    public abstract String getCacheImplClass();
+    
     public abstract String getJsonDataFile();
     
     public abstract Properties getJpaProperties();
