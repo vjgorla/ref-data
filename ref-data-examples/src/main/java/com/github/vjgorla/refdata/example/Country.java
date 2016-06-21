@@ -32,7 +32,7 @@ public class Country extends AbstractRefDataValue {
     }
     
     public static Country decode(String code) {
-        return new Country(code);
+        return TYPE.decode(code);
     }
     
     public static List<Country> values() {

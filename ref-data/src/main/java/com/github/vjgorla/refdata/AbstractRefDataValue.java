@@ -3,6 +3,8 @@ package com.github.vjgorla.refdata;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.github.vjgorla.refdata.cache.RefDataCache;
+import com.github.vjgorla.refdata.entity.RefDataValueEntity;
 import com.github.vjgorla.refdata.util.DateUtils;
 import com.github.vjgorla.refdata.util.StringUtils;
 import com.google.common.base.Objects;
@@ -20,7 +22,8 @@ public abstract class AbstractRefDataValue implements Serializable {
     protected AbstractRefDataValue(RefDataType<?> type, String code) {
         this.type = type;
         this.code = code;
-        this.type.ensureExists(this.code);
+        // Ensure entity exists
+        getValueEntity();
     }
     
     public RefDataType<?> getType() {
@@ -32,15 +35,15 @@ public abstract class AbstractRefDataValue implements Serializable {
     }
     
     public String getDescription() {
-        return type.getDescription(code);
+        return getValueEntity().getDescription();
     }
 
     public Date getEffectiveFrom() {
-        return type.getEffectiveFrom(code);
+        return getValueEntity().getEffectiveFrom();
     }
 
     public Date getEffectiveTo() {
-        return type.getEffectiveTo(code);
+        return getValueEntity().getEffectiveTo();
     }
     
     public boolean isEffective() {
@@ -50,7 +53,7 @@ public abstract class AbstractRefDataValue implements Serializable {
     }
 
     protected String getAttribute(String key) {
-        return type.getAttribute(code, key);
+        return getValueEntity().getAttribute(key);
     }
     
     protected String[] getAttributeAsList(String key) {
@@ -59,6 +62,10 @@ public abstract class AbstractRefDataValue implements Serializable {
             return new String[0];
         }
         return attributeStr.split(",");
+    }
+    
+    private RefDataValueEntity getValueEntity() {
+        return RefDataCache.getCacheImpl().get(type, code);
     }
 
     @Override

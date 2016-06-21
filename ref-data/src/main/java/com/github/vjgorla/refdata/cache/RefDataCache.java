@@ -23,12 +23,20 @@ public abstract class RefDataCache {
     private static RefDataCache CACHE_IMPL;
     
     public RefDataValueEntity get(RefDataType<?> type, String code) {
-        RefDataValueMap refDataValueMap = getNotExpired(type);
-        RefDataValueEntity entity = refDataValueMap.get(code);
+        RefDataValueEntity entity = getOrNull(type, code);
         if (entity == null) {
             throw new IllegalArgumentException("Value [" + code + "] not found for type [" + type.getTypeCode() + "]");
         }
         return entity;
+    }
+
+    public boolean hasEntity(RefDataType<?> type, String code) {
+        return getOrNull(type, code) != null;
+    }
+    
+    private RefDataValueEntity getOrNull(RefDataType<?> type, String code) {
+        RefDataValueMap refDataValueMap = getNotExpired(type);
+        return refDataValueMap.get(code);
     }
 
     public Set<String> getCodes(RefDataType<?> type) {
