@@ -53,7 +53,6 @@ public class JpaRefDataLoaderTest {
                 return props;
             }
         });
-        TestUtils.resetRefDataCache();
     }
     
     @Test

@@ -61,8 +61,8 @@ public class ReflectionUtils {
     public static <T> T newInstance(Constructor<T> constructor, Object ... initargs) {
         try {
             return constructor.newInstance(initargs);
-        } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-            throw new IllegalArgumentException("Can't instantiate class [" + constructor.getDeclaringClass().getName() + "]");
+        } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
+            throw new IllegalArgumentException("Can't instantiate class [" + constructor.getDeclaringClass().getName() + "]", ex);
         }
     }
 }

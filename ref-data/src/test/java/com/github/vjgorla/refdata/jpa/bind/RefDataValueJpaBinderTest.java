@@ -23,6 +23,7 @@ import org.junit.Test;
 
 import com.github.vjgorla.refdata.AbstractRefDataValue;
 import com.github.vjgorla.refdata.RefDataType;
+import com.github.vjgorla.refdata.cache.impl.SimpleRefDataCache;
 import com.github.vjgorla.refdata.entity.RefDataValueEntity;
 import com.github.vjgorla.refdata.jpa.bind.RefDataValueJpaBinder;
 import com.github.vjgorla.refdata.loader.RefDataLoader;
@@ -42,8 +43,11 @@ public class RefDataValueJpaBinderTest {
             public String getLoaderImplClass() {
                 return MockRefDataLoader.class.getName();
             }
+            @Override
+            public String getCacheImplClass() {
+                return SimpleRefDataCache.class.getName();
+            }
         });
-        TestUtils.resetRefDataCache();
     }
     
     private EntityManagerFactory emFactory;
