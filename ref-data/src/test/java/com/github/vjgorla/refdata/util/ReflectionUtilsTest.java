@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import com.github.vjgorla.refdata.AbstractRefDataValue;
 import com.github.vjgorla.refdata.RefDataType;
+import com.github.vjgorla.refdata.cache.impl.SimpleRefDataCache;
 import com.github.vjgorla.refdata.config.Config;
 import com.github.vjgorla.refdata.entity.RefDataValueEntity;
 import com.github.vjgorla.refdata.loader.RefDataLoader;
@@ -29,8 +30,11 @@ public class ReflectionUtilsTest {
             public String getLoaderImplClass() {
                 return MockRefDataLoader.class.getName();
             }
+            @Override
+            public String getCacheImplClass() {
+                return SimpleRefDataCache.class.getName();
+            }
         });
-        TestUtils.resetRefDataCache();
     }
     
     @Test(expected = IllegalArgumentException.class)
