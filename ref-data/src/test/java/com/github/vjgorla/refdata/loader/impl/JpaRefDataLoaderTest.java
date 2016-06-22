@@ -2,6 +2,7 @@ package com.github.vjgorla.refdata.loader.impl;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.sameInstance;
 
 import java.util.HashSet;
 import java.util.List;
@@ -61,7 +62,7 @@ public class JpaRefDataLoaderTest {
     @Test
     public void givenStaticTypesLoaded_whenDecode_thenValueEqualsStaticType() {
         TestValueType code1 = TestValueType.type.decode("CODE1");
-        assertThat(code1, is(TestValueType.CODE1));
+        assertThat(code1, sameInstance(TestValueType.CODE1));
         assertThat(TestValueType.type.values(false).size(), is(3));
     }
 
@@ -73,9 +74,9 @@ public class JpaRefDataLoaderTest {
     @Test
     public void givenLoaderReturnsEntitiesInUndefinedOrder_whenValues_thenValuesReturnedInCodeOrder() {
         List<TestValueType> values = TestValueType.type.values(false);
-        assertThat(values.get(0).getCode(), is("CODE1"));
-        assertThat(values.get(1).getCode(), is("CODE2"));
-        assertThat(values.get(2).getCode(), is("CODE3"));
+        assertThat(values.get(0).getCode(), sameInstance("CODE1"));
+        assertThat(values.get(1).getCode(), sameInstance("CODE2"));
+        assertThat(values.get(2).getCode(), sameInstance("CODE3"));
     }
 
     private static class TestValueType extends AbstractRefDataValue {

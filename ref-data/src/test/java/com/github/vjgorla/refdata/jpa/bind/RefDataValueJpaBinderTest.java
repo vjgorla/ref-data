@@ -1,7 +1,7 @@
 package com.github.vjgorla.refdata.jpa.bind;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.sameInstance;
 import static org.hamcrest.Matchers.nullValue;
 
 import java.util.Collections;
@@ -87,7 +87,7 @@ public class RefDataValueJpaBinderTest {
         em.clear();
         em.close();
         
-        assertThat(customer.country, is(Country.AUS));
+        assertThat(customer.country, sameInstance(Country.AUS));
     }
     
     @Test
