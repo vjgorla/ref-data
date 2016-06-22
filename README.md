@@ -21,7 +21,7 @@ public class Country extends AbstractRefDataValue {
         super(TYPE, code);
     }
     public static Country decode(String code) {
-        return new Country(code);
+        return TYPE.decode(code);
     }
     public static List<Country> values() {
         return TYPE.values(false);
@@ -153,6 +153,6 @@ customer.setCountry(Country.AUS);
 entityManager.persist(customer);
 ...
 Country custCountry = customer.getCountry();
-if (custCountry.equals(Country.AUS)) {
+if (custCountry == Country.AUS) {
 ...
 ```
