@@ -37,7 +37,10 @@ import com.github.vjgorla.refdata.util.TestUtils;
 @SuppressWarnings({"deprecation","serial"})
 public class RefDataValueJpaBinderTest {
 
-    static {
+    private EntityManagerFactory emFactory;
+    
+    @Before
+    public void setUp() {
         TestUtils.resetRefDataConfig(new EmptyConfig() {
             @Override
             public String getLoaderImplClass() {
@@ -48,12 +51,7 @@ public class RefDataValueJpaBinderTest {
                 return SimpleRefDataCache.class.getName();
             }
         });
-    }
-    
-    private EntityManagerFactory emFactory;
-    
-    @Before
-    public void setUp() {
+        TestUtils.resetRefDataCache();
         Properties props = new Properties();
         props.put("javax.persistence.provider", "org.hibernate.ejb.HibernatePersistence");
         props.put("javax.persistence.transactionType", "RESOURCE_LOCAL");

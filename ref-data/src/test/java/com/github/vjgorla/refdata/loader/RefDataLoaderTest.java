@@ -14,6 +14,7 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.TreeSet;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import com.github.vjgorla.refdata.AbstractRefDataValue;
@@ -35,7 +36,8 @@ import com.google.common.cache.CacheBuilder;
 @SuppressWarnings({"serial", "unused"})
 public class RefDataLoaderTest {
 
-    static {
+    @Before
+    public void setUp() {
         TestUtils.resetRefDataConfig(new EmptyConfig() {
             @Override
             public String getLoaderImplClass() {
@@ -46,6 +48,7 @@ public class RefDataLoaderTest {
                 return SimpleRefDataCache.class.getName();
             }
         });
+        TestUtils.resetRefDataCache();
     }
     
     @Test

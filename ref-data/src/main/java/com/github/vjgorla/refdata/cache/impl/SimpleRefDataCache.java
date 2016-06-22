@@ -15,7 +15,7 @@ import com.google.common.cache.LoadingCache;
  */
 public class SimpleRefDataCache extends RefDataCache {
 
-    private LoadingCache<RefDataType<?>, RefDataValueMap> CACHE  
+    private static LoadingCache<RefDataType<?>, RefDataValueMap> CACHE  
         = CacheBuilder.newBuilder().build(RefDataLoader.getLoaderImpl());
 
     public RefDataValueMap getNotExpired(RefDataType<?> type) {

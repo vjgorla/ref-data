@@ -11,6 +11,7 @@ import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import com.github.vjgorla.refdata.AbstractRefDataValue;
@@ -29,7 +30,8 @@ import com.github.vjgorla.refdata.util.TestUtils;
 @SuppressWarnings("serial")
 public class JpaRefDataLoaderTest {
 
-    static {
+    @Before
+    public void setUp() {
         TestUtils.resetRefDataConfig(new EmptyConfig() {
             @Override
             public String getLoaderImplClass() {
@@ -53,6 +55,7 @@ public class JpaRefDataLoaderTest {
                 return props;
             }
         });
+        TestUtils.resetRefDataCache();
     }
     
     @Test

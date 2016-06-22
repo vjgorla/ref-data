@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.Properties;
 import java.util.Set;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import com.github.vjgorla.refdata.AbstractRefDataValue;
@@ -24,7 +25,8 @@ import com.github.vjgorla.refdata.util.ReflectionUtils;
 @SuppressWarnings({"serial", "unused"})
 public class ReflectionUtilsTest {
 
-    static {
+    @Before
+    public void setUp() {
         TestUtils.resetRefDataConfig(new EmptyConfig() {
             @Override
             public String getLoaderImplClass() {
@@ -35,6 +37,7 @@ public class ReflectionUtilsTest {
                 return SimpleRefDataCache.class.getName();
             }
         });
+        TestUtils.resetRefDataCache();
     }
     
     @Test(expected = IllegalArgumentException.class)
