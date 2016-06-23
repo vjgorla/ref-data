@@ -1,6 +1,8 @@
 # ref-data
 Framework to simplify reference data loading for java applications.
 
+[![Build Status](https://travis-ci.org/vjgorla/ref-data.svg?branch=master)](https://travis-ci.org/vjgorla/ref-data)
+
 ## Basic usage
 
 1 Create a concreate type
