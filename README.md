@@ -1,5 +1,5 @@
 # ref-data
-Framework to simplify reference data loading for java applications
+Framework to simplify reference data loading for java applications.
 
 ## Basic usage
 
