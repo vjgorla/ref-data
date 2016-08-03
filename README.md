@@ -86,7 +86,7 @@ Country nz = Country.decode('NZ');
 // Enumerate
 List<Country> countries = Country.values();
 // Write branching logic
-if (customer.getCountry().equals(Country.AUS)) {
+if (customer.getCountry() == Country.AUS) {
 ```
 
 ## Type attributes
